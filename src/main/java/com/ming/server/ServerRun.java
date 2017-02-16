@@ -19,6 +19,7 @@ public class ServerRun extends BaseServer{
     private final static Logger LOGGER = LoggerFactory.getLogger(BaseServer.class);
     public void run() {
         try {
+
             TMultiplexedProcessor processor = new TMultiplexedProcessor();
             TServerTransport t = new TServerSocket(SERVER_PORT);
             InetAddress addr = InetAddress.getLocalHost();
