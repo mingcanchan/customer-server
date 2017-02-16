@@ -9,15 +9,18 @@ import org.apache.thrift.server.TServer;
 import org.apache.thrift.server.TThreadPoolServer;
 import org.apache.thrift.transport.TServerSocket;
 import org.apache.thrift.transport.TTransportException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Created by chenmingcan on 2017/2/15.
  */
 public class Server {
+    private final static Logger LOGGER = LoggerFactory.getLogger(Server.class);
     public void startServer() {
         try {
             System.out.println("thrift server open port 1234");
-
+            LOGGER.info("thrift starting");
             TMultiplexedProcessor processor = new TMultiplexedProcessor();
             TServerSocket serverTransport = new TServerSocket(1234);
 
