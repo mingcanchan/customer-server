@@ -13,17 +13,17 @@ import org.apache.thrift.transport.TTransportException;
 public class MultipleClient {
 
     public static void main(String[] args) {
-        TSocket transport = new TSocket( "localhost" ,1234);
+        TSocket transport = new TSocket( "192.168.62.224" ,9090);
 
         TBinaryProtocol protocol = new TBinaryProtocol(transport);
 
-        TMultiplexedProtocol mp1 = new TMultiplexedProtocol (protocol, "Hello" );
+        TMultiplexedProtocol mp1 = new TMultiplexedProtocol (protocol, "TopicService" );
 
-        Hello.Client service1 = new Hello.Client(mp1);
+        TopicService.Client service1 = new TopicService.Client(mp1);
 
-        TMultiplexedProtocol mp2 = new TMultiplexedProtocol (protocol, "DoSomething" );
+        TMultiplexedProtocol mp2 = new TMultiplexedProtocol (protocol, "UserService" );
 
-        DoSomething.Client service2 = new DoSomething.Client(mp2);
+        UserService.Client service2 = new UserService.Client(mp2);
 
         try {
             transport.open();
@@ -32,15 +32,15 @@ public class MultipleClient {
         }
 
         try {
-            service1.sayHello("hello");
-//            service1.store( new Topic(668, "test topic" , "just a test!" ));
+//            service1.sayHello("hello");
+            service1.store( new Topic(668, "test topic" , "just a test!" ));
         } catch (TException e) {
             e.printStackTrace();
         }
 
         try {
-            service2.doString("world");
-//            service2.store1( new User(888, "tom" , "haha" ));
+//            service2.doString("world");
+            service2.store1( new User(888, "tom" , "haha" ));
         } catch (TException e) {
             e.printStackTrace();
         }

@@ -10,19 +10,23 @@ import org.apache.thrift.server.TThreadPoolServer;
 import org.apache.thrift.transport.TServerSocket;
 import org.apache.thrift.transport.TServerTransport;
 import org.apache.thrift.transport.TTransportException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Created by chenmingcan on 2017/2/16.
  */
 public class MultipleServer {
 
+    private final static Logger LOGGER = LoggerFactory.getLogger(MultipleServer.class);
     public static void main(String[] args) {
-
+        LOGGER.info("server starting......");
         TMultiplexedProcessor processor = new TMultiplexedProcessor();
         TServerTransport t = null;
         try {
             t = new TServerSocket(9090);
         } catch (TTransportException e) {
+            LOGGER.error("sever exception!!!");
             e.printStackTrace();
         }
 
@@ -34,8 +38,7 @@ public class MultipleServer {
 
 //         TSimpleServer server = new TSimpleServer(new Args (t).processor(processor));
 
-        System.out.println("the serveris started and is listening at 9090...");
-
+        LOGGER.debug("server running now");
         server.serve();
     }
 }

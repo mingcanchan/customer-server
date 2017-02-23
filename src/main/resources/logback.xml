@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration scan="true">
+     
+    <property name="USER_HOME" value="/cydia/logs/" />
+    <property name="PORT" value="9090" />
+    <property name="MODULENAME" value="customer"/>
+    
+    <!-- 控制台输出 -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender"> 
+	    <encoder>
+            <!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符-->
+	    	<pattern>%d{yyyyMMdd HH:mm:ss SSS}[%thread][%level]-%msg%n</pattern> 
+	    </encoder> 
+    </appender>
+    
+    
+    <!-- debug 开发使用 -->  
+    <appender name="DEBUG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!--日志文件输出的文件名-->
+        <File>${USER_HOME}/${MODULENAME}/${MODULENAME}_${PORT}_debug.log</File>
+        <filter class="ch.qos.logback.core.filter.EvaluatorFilter">
+            <evaluator>
+                <!--过滤日志输出级别-->
+                <expression>(level=>DEBUG)</expression>
+            </evaluator>
+            <OnMatch>ACCEPT</OnMatch>
+            <OnMismatch>DENY</OnMismatch>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+        	<fileNamePattern>${USER_HOME}/${MODULENAME}/${MODULENAME}_${PORT}_%d{yyyyMMdd}_debug_%i.log</fileNamePattern>
+            <!--日志文件保留天数-->
+        	<maxHistory>30</maxHistory>
+        	
+        	<TimeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+		    	<MaxFileSize>512MB</MaxFileSize>
+		    </TimeBasedFileNamingAndTriggeringPolicy>  
+        </rollingPolicy>
+        <layout>
+            <Pattern>%d{yyyyMMdd HH:mm:ss SSS}[%thread][%level]-%msg%n</Pattern>
+        </layout>
+    </appender>
+   
+    <!-- =========================================公用配置Start=============================== -->
+     <appender name="MODULENAME-INFO" class="ch.qos.logback.core.rolling.RollingFileAppender">
+       	 <File>${USER_HOME}/${MODULENAME}/${MODULENAME}_${PORT}_info.log</File>
+         <filter class="ch.qos.logback.core.filter.EvaluatorFilter"> 
+	        <evaluator> 
+	        	<expression>(level>=INFO)</expression> 
+	        </evaluator> 
+	        <OnMatch>ACCEPT</OnMatch>
+        	<OnMismatch>DENY</OnMismatch>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+        	<fileNamePattern>${USER_HOME}/${MODULENAME}/${MODULENAME}_${PORT}_%d{yyyyMMdd}_info_%i.log</fileNamePattern>
+        	<maxHistory>30</maxHistory>
+        	
+        	<TimeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+		    	<MaxFileSize>512MB</MaxFileSize>
+		    </TimeBasedFileNamingAndTriggeringPolicy>  
+        </rollingPolicy>
+        <layout>
+            <Pattern>%d{yyyyMMdd HH:mm:ss SSS}[%thread][%level]-%msg%n</Pattern>
+        </layout>
+    </appender>
+    
+    
+    <appender name="MODULENAME-ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>${USER_HOME}/${MODULENAME}/${MODULENAME}_${PORT}_error.log</File>
+         <filter class="ch.qos.logback.core.filter.EvaluatorFilter"> 
+	        <evaluator> 
+	        	<expression>(level==ERROR)</expression> 
+	        </evaluator> 
+	        <OnMatch>ACCEPT</OnMatch>
+        	<OnMismatch>DENY</OnMismatch>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+        	<fileNamePattern>${USER_HOME}/${MODULENAME}/${MODULENAME}_${PORT}_%d{yyyyMMdd}_error.log</fileNamePattern>
+        	<maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <layout>
+            <Pattern>%d{yyyyMMdd HH:mm:ss SSS} [%thread][%level]-%msg%n</Pattern>
+        </layout>
+    </appender>
+    <!-- =========================================公用配置End=============================== -->
+    <!-- 日志输出级别 -->
+    <root level="DEBUG">
+	     <appender-ref ref="MODULENAME-ERROR"/>
+	     <appender-ref ref="MODULENAME-INFO"/>
+	     <appender-ref ref="DEBUG"/>
+	     <appender-ref ref="STDOUT"/>
+    </root>
+</configuration>
+
