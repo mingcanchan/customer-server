@@ -21,7 +21,7 @@
         <filter class="ch.qos.logback.core.filter.EvaluatorFilter">
             <evaluator>
                 <!--过滤日志输出级别-->
-                <expression>(level=>DEBUG)</expression>
+                <expression>(level>=DEBUG)</expression>
             </evaluator>
             <OnMatch>ACCEPT</OnMatch>
             <OnMismatch>DENY</OnMismatch>

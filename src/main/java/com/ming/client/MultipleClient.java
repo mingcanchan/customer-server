@@ -1,5 +1,7 @@
 package com.ming.client;
 
+import com.ming.thrift.User;
+import com.ming.thrift.UserService;
 import com.ming.thrift.test.*;
 import org.apache.thrift.TException;
 import org.apache.thrift.protocol.TBinaryProtocol;
@@ -13,17 +15,13 @@ import org.apache.thrift.transport.TTransportException;
 public class MultipleClient {
 
     public static void main(String[] args) {
+
         TSocket transport = new TSocket( "192.168.62.224" ,9090);
-
         TBinaryProtocol protocol = new TBinaryProtocol(transport);
-
         TMultiplexedProtocol mp1 = new TMultiplexedProtocol (protocol, "TopicService" );
-
-        TopicService.Client service1 = new TopicService.Client(mp1);
-
+        TopicService.Iface service1 = new TopicService.Client(mp1);
         TMultiplexedProtocol mp2 = new TMultiplexedProtocol (protocol, "UserService" );
-
-        UserService.Client service2 = new UserService.Client(mp2);
+        UserService.Iface service2 = new UserService.Client(mp2);
 
         try {
             transport.open();

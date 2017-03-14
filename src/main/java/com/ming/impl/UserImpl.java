@@ -1,7 +1,7 @@
 package com.ming.impl;
 
-import com.ming.thrift.test.User;
-import com.ming.thrift.test.UserService;
+import com.ming.thrift.User;
+import com.ming.thrift.UserService;
 import org.apache.thrift.TException;
 
 /**

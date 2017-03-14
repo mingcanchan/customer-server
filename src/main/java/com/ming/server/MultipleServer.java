@@ -2,8 +2,8 @@ package com.ming.server;
 
 import com.ming.impl.TopicImpl;
 import com.ming.impl.UserImpl;
+import com.ming.thrift.UserService;
 import com.ming.thrift.test.TopicService;
-import com.ming.thrift.test.UserService;
 import org.apache.thrift.TMultiplexedProcessor;
 import org.apache.thrift.server.TServer;
 import org.apache.thrift.server.TThreadPoolServer;
@@ -20,7 +20,7 @@ public class MultipleServer {
 
     private final static Logger LOGGER = LoggerFactory.getLogger(MultipleServer.class);
     public static void main(String[] args) {
-        LOGGER.info("server starting......");
+        LOGGER.info("server starting......{}{}","hello","world");
         TMultiplexedProcessor processor = new TMultiplexedProcessor();
         TServerTransport t = null;
         try {

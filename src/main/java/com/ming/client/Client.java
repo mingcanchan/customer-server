@@ -19,13 +19,16 @@ public class Client {
             System.out.println("thrift client connext server at 1234 port ");
             transport = new TSocket("localhost", 1234);
             TBinaryProtocol protocol = new TBinaryProtocol(transport);
+
             TMultiplexedProtocol mp1 = new TMultiplexedProtocol(protocol, "Hello");
             DoSomething.Client service1 = new DoSomething.Client(mp1);
             TMultiplexedProtocol mp2 = new TMultiplexedProtocol(protocol, "DoSomething");
             Hello.Client service2 = new Hello.Client(mp2);
             transport.open();
+
             System.out.println(service2.sayHello("mingcanchen"));
             System.out.println(service1.doString("hello world"));
+
             transport.close();
             System.out.println("thrift client close connextion");
         } catch (TTransportException e) {
