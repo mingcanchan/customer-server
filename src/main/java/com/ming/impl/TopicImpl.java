@@ -1,7 +1,6 @@
 package com.ming.impl;
-
-import com.ming.thrift.test.Topic;
-import com.ming.thrift.test.TopicService;
+import com.ming.thrift.service.Topic;
+import com.ming.thrift.service.TopicService;
 import org.apache.thrift.TException;
 
 /**

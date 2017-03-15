@@ -6,9 +6,8 @@
 
     <groupId>com.ming.server</groupId>
     <artifactId>customer-server</artifactId>
-    <packaging>pom</packaging>
+    <packaging>jar</packaging>
     <version>1.0.0-SNAPSHOT</version>
-
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
@@ -71,12 +70,6 @@
             <groupId>org.apache.thrift</groupId>
             <artifactId>libthrift</artifactId>
             <version>0.10.0</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.ming.server.api</groupId>
-            <artifactId>ming-server-api</artifactId>
-            <version>1.0-SNAPSHOT </version>
         </dependency>
     </dependencies>
     <build>

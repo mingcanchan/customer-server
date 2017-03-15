@@ -1,8 +1,9 @@
 package com.ming.client;
 
-import com.ming.thrift.User;
-import com.ming.thrift.UserService;
-import com.ming.thrift.test.*;
+import com.ming.thrift.service.Topic;
+import com.ming.thrift.service.TopicService;
+import com.ming.thrift.service.User;
+import com.ming.thrift.service.UserService;
 import org.apache.thrift.TException;
 import org.apache.thrift.protocol.TBinaryProtocol;
 import org.apache.thrift.protocol.TMultiplexedProtocol;

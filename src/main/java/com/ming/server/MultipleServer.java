@@ -2,8 +2,8 @@ package com.ming.server;
 
 import com.ming.impl.TopicImpl;
 import com.ming.impl.UserImpl;
-import com.ming.thrift.UserService;
-import com.ming.thrift.test.TopicService;
+import com.ming.thrift.service.TopicService;
+import com.ming.thrift.service.UserService;
 import org.apache.thrift.TMultiplexedProcessor;
 import org.apache.thrift.server.TServer;
 import org.apache.thrift.server.TThreadPoolServer;
